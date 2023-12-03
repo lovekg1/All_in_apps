@@ -30,12 +30,26 @@
 
         #pdfInput {
             margin-bottom: 10px;
+            position: relative;
+        }
+
+        #fileInput {
+            margin-bottom: 10px;
         }
 
         #searchInput {
             width: 200px;
             padding: 10px;
             margin-right: 10px;
+        }
+
+        #clearIcon {
+            position: absolute;
+            top: 70%;
+            right: 172px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            display: none;
         }
 
         #result {
@@ -58,7 +72,7 @@
         }
 
         button {
-            padding: 10px 20px;
+            padding: 10px 30px;
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -73,12 +87,37 @@
 </head>
 
 <body>
-    <input type="file" id="pdfInput" accept=".pdf">
-    <input type="text" id="searchInput" placeholder="Nhập Art để tìm trang">
-    <button onclick="searchInPDF()">Tìm</button>
-    <div id="result"></div>
+    <div id="pdfInput">
+        <input type="file" id="fileInput" accept=".pdf">
+        <input type="text" id="searchInput" placeholder="Nhập Art để tìm trang">
+        <div id="clearIcon" onclick="clearSearchInput()">X</div>
+        <button onclick="searchInPDF()">Search</button>
+    </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const clearIcon = document.getElementById('clearIcon');
+
+            // Show clear icon when input has text
+            searchInput.addEventListener('input', function () {
+                clearIcon.style.display = searchInput.value ? 'block' : 'none';
+            });
+
+            // Hide clear icon when clicking outside the input
+            document.addEventListener('click', function (event) {
+                if (!event.target.matches('#searchInput') && !event.target.matches('#clearIcon')) {
+                    clearIcon.style.display = 'none';
+                }
+            });
+        });
+
+        function clearSearchInput() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            document.getElementById('clearIcon').style.display = 'none';
+        }
+
         async function searchInPDF() {
             const pdfInput = document.getElementById('pdfInput');
             const searchInput = document.getElementById('searchInput');
