@@ -17,7 +17,7 @@
         body {
             font-family: 'Arial', sans-serif;
             margin: 20px auto;
-            width: 70%;
+            width: 80%;
         }
 
         .container {
@@ -59,18 +59,15 @@
             <input type="file" id="fileInput">
         </label>
         <div>
-            <input type="text" id="searchInput" placeholder="Hãy nhập Art cần tìm..">
+            <input type="text" id="searchInput" placeholder="Nhập Art cần tìm..">
             <button>Search</button>
         </div>
     </div>
 
     <script>
-        var fileInput = document.getElementById('fileInput')
-        var fileNameDisplay = document.getElementById('fileNameDisplay')
-
         // Hiển thị tên file sau khi upload
         fileInput.addEventListener('change', () => {
-            fileNameDisplay.textContent = fileInput.files[0].name
+            fileNameDisplayt.textContent = fileInput.files[0].name
         })
     </script>
 </body>
